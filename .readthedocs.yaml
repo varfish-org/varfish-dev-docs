@@ -13,7 +13,6 @@ build:
 sphinx:
   configuration: src/conf.py
 
-# NB: mermaid diagrams currently broken on readthedocs PDF
 formats:
   - pdf
   - epub
