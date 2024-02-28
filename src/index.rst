@@ -8,3 +8,4 @@ VarFish Development Docs
     :caption: Documents
 
     doc_architecture
+    doc_dataflows
