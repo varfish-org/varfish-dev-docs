@@ -22,50 +22,68 @@ Also, we use the Traefik reverse proxy for routing requests to the correct servi
       %% end
       %% key:::neutral
 
-      subgraph Services [Misc Services]
-        direction TB
+      subgraph X [.]
+        subgraph BackingServices [Backing Services]
+          direction LR
 
-        annonars[Annonars]:::owned
-        mehari[Mehari]:::owned
-        viguno[Viguno]:::owned
-        nginx[NGINX]:::owned
-        fs[(File System)]:::neutral
-        cada-prio[CADA-Prio]:::owned
-        cadd-rest-api[CADD REST]:::thirdParty
-        exomiser[Exomiser]:::thirdParty
-        redis[Redis]:::thirdParty
+          annonars[Annonars]:::owned
+          mehari[Mehari]:::owned
+          viguno[Viguno]:::owned
+          nginx[NGINX]:::owned
+          fs[(File System)]:::neutral
+          cadaPrio[CADA-Prio]:::owned
+          caddRestApi[CADD REST]:::thirdParty
+          exomiser[Exomiser]:::thirdParty
+          redis[Redis]:::thirdParty
 
-        annonars --> fs
-        mehari --> fs
-        viguno --> fs
-        nginx --> fs
-        cada-prio --> fs
-        cadd-rest-api --> fs
-        exomiser --> fs
+          annonars --> fs
+          mehari --> fs
+          viguno --> fs
+          nginx --> fs
+          cadaPrio --> fs
+          caddRestApi --> fs
+          exomiser --> fs
+        end
+
+        subgraph RemoteServices [Remote Services]
+          direction LR
+
+          pubtator[PubTator 3]:::thirdParty
+          variantValidator[VarianvtValidator]:::thirdParty
+          ga4ghBeacon[GA4GH\nBeacon Network]:::thirdParty
+        end
+        RemoteServices:::thirdParty
       end
+      X:::transparent
 
       subgraph Core [Server Core]
         direction LR
 
-        varfish-server[VarFish Server]:::owned
-        varfish-celeryd[VarFish Celery]:::owned
+        varfishServer[VarFish Server]:::owned
+        varfishCeleryd[VarFish Celery]:::owned
         postgres[(Postgres)]:::thirdParty
-        varfish-server --> varfish-celeryd
-        varfish-server --> postgres
-        varfish-celeryd --> postgres
+        varfishServer --> varfishCeleryd
+        varfishServer --> postgres
+        varfishCeleryd --> postgres
       end
 
       user([end user])
 
-      Core -- "use via HTTP APIs" --> Services
-      user --> varfish-server
+      Core -- "use via HTTP APIs" --> BackingServices
+      Core -- "use via HTTP APIs" --> RemoteServices
+      user --> varfishServer
 
       classDef neutral fill:white
       classDef owned fill:#c5effc
       classDef thirdParty fill:#e9c5fc
+      classDef transparent fill:white,stroke:white,color:white
 
-user
-  The user uses their web browser to connect to the Varfish Server and interacts with the system.
+end user
+    The end user (data analyst) uses their web browser to connect to the Varfish Server and interacts with the system.
+
+operator user
+    The user operating a VarFish instance interfaces with the system also via the web user interface.
+    Certain actions must be performed via REST APIs provided by the VarFish Server, in particular importing data for later analysis.
 
 -----------
 Core System
@@ -94,11 +112,11 @@ Postgres
     Work is underway to move this to an internal object storage and run queries on this storage.
     This will allow for more optimized queries and scaling as the Postgres system will not be the single bottleneck anymore.
 
------------------------
-Misceallaneous Services
------------------------
+----------------
+Backing Services
+----------------
 
-There is a list of services that run in the background that the user does not interact with directly.
+There is a list of services that run in the background within the VarFish instance that the user does not interact with directly.
 They provide HTTP-based URLs to the core system then are stateless.
 There is no interaction betwen these services.
 
@@ -155,3 +173,20 @@ Redis
 .. note::
 
     With recent versions of the HPO, information content is not very useful for variant prioritization.
+
+---------------
+Remote Services
+---------------
+
+VarFish also provides access to certain remote services run by third parties.
+This reduces the complexity of local hosting and keeping data up to date and even is necessary for some kinds of services.
+On the other hand, it makes the instance rely on the availability of these remote services.
+
+PubTator 3
+    VarFish uses the PubTator 3 API for providing relevant literature information for genes.
+
+VariantValidator
+    The VariantValidator.org service is used for providing gold standard HGVS descriptions for seqvars.
+
+GA4GH Beacon Network
+    The GA4GH Beacon Network embeddable IFRAME is used for alllowing to query the GA4GH Beacon Network for variant information.
