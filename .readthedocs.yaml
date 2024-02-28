@@ -8,12 +8,12 @@ build:
   jobs:
     post_install:
       - npm install -g @mermaid-js/mermaid-cli
-      - node node_modules/puppeteer/install.js
 
 # Build documentation in the "src/" directory with Sphinx
 sphinx:
   configuration: src/conf.py
 
+# NB: mermaid diagrams currently broken on readthedocs PDF
 formats:
   - pdf
   - epub
