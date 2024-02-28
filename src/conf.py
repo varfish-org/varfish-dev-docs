@@ -29,5 +29,5 @@ html_theme_options = {
 
 # -- Options for mermaid rendering -------------------------------------------
 
-mermaid_output_format = "svg"
+mermaid_output_format = "raw"
 mermaid_params = ["-p" "puppeteer-config.json"]
