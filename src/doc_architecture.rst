@@ -190,3 +190,6 @@ VariantValidator
 
 GA4GH Beacon Network
     The GA4GH Beacon Network embeddable IFRAME is used for alllowing to query the GA4GH Beacon Network for variant information.
+
+Genomics England PanelApp
+    We use the GE PanelApp API for fetching up-to-date gene panel information.
