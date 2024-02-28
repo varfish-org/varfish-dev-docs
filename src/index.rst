@@ -9,3 +9,4 @@ VarFish Development Docs
 
     doc_architecture
     doc_dataflows
+    doc_futureplans
