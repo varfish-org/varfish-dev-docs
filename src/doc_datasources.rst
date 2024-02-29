@@ -23,6 +23,8 @@ The following datasources are used directly from the repository.
 
 
 .. list-table::
+    :widths: 30 20 30 20
+    :class: longtable
     :header-rows: 1
 
     * - Name
@@ -61,6 +63,8 @@ The following datasources are downloaded from public internet resources.
 
 
 .. list-table::
+    :widths: 30 20 30 20
+    :class: longtable
     :header-rows: 1
 
     * - Name
