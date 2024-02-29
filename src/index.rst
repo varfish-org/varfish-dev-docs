@@ -4,7 +4,7 @@ VarFish Development Docs
 ========================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :caption: Documents
 
     doc_architecture
