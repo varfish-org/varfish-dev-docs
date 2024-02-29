@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0 (2024-02-29)
+
+
+### Documentation
+
+* adding datasource list ([#6](https://github.com/varfish-org/varfish-dev-docs/issues/6)) ([cae4a75](https://github.com/varfish-org/varfish-dev-docs/commit/cae4a756c9469519a000550407b32c9ce2e57a0c))
+* adding future plans ([#4](https://github.com/varfish-org/varfish-dev-docs/issues/4)) ([171efc2](https://github.com/varfish-org/varfish-dev-docs/commit/171efc20dbb6ba5c8f21414dcbbb72343ac94eb0))
+* adding repository overview section ([#5](https://github.com/varfish-org/varfish-dev-docs/issues/5)) ([316b2e8](https://github.com/varfish-org/varfish-dev-docs/commit/316b2e8b587457d8dfa7cfb583c0872a66a99377))
+* initial dataflow description ([#3](https://github.com/varfish-org/varfish-dev-docs/issues/3)) ([16f5522](https://github.com/varfish-org/varfish-dev-docs/commit/16f5522092c242b873f689678c0c099d42070941))
+* start out with architecture documentation ([#1](https://github.com/varfish-org/varfish-dev-docs/issues/1)) ([e22afc7](https://github.com/varfish-org/varfish-dev-docs/commit/e22afc790b1dfb973144adc39e9477848493a035))
+
 ## [0.6.3](https://github.com/varfish-org/varfish-cli/compare/v0.6.2...v0.6.3) (2024-01-24)
 
 
