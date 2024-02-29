@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/varfish-org/varfish-dev-docs/compare/v0.1.0...v0.1.1) (2024-02-29)
+
+
+### Documentation
+
+* refine datasource table columns ([#8](https://github.com/varfish-org/varfish-dev-docs/issues/8)) ([8cf055e](https://github.com/varfish-org/varfish-dev-docs/commit/8cf055e650e6b9afcc35b07da930f0784630ac10))
+
 ## 0.1.0 (2024-02-29)
 
 
