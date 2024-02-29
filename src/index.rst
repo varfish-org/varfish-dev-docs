@@ -11,3 +11,4 @@ VarFish Development Docs
     doc_dataflows
     doc_futureplans
     doc_repooverview
+    doc_datasources
