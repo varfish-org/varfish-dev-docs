@@ -36,21 +36,19 @@ The following datasources are used directly from the repository.
       - Supplementary Findings Gene List of ACMG
       - `PMID:35802134 <https://europepmc.org/article/med/35802134>`__
     * - DOMINO
-      - N/A (based on denovodb, which is permissive, but Simons Foundation is
-        only to projects for autism and intellectual disability, author
-        contacted)
+      - :term:`Public Domain <Public Domain (Author Email)>`
       - Score for assessing the probability for a gene to harbour dominant changes
       - Institute of Molecular and Clinical Ophthalmology Basel; `PMID:28985496 <https://europepmc.org/article/med/28985496>`__
     * - Enrichment Regions
-      - N/A
+      - `Public Domain <https://genome.ucsc.edu/license/>`__
       - Target regions of NGS enrichment kits
       - `UCSC Table Browser <https://genome.ucsc.edu/cgi-bin/hgTables?db=hg19&hgta_group=map&hgta_track=exomeProbesets&hgta_table=MGI_Exome_Capture_V5&hgta_doSchema=describe+table+schema>`__
     * - Patho MMS
-      - N/A
+      - Public Domain
       - Curated regions for microdeletion and microduplication scores
       - `PMID:36435749 <https://europepmc.org/article/med/36435749>`__
     * - sHet
-      - N/A
+      - :term:`N/A (Emailed Author)`
       - Gene haploinsuffiency score
       - `PMID:31004148 <https://europepmc.org/article/med/31004148>`__
 
@@ -110,7 +108,7 @@ The following datasources are downloaded from public internet resources.
       - Structural variants from DGV
       - `The Centre for Applied Genomics <http://dgv.tcag.ca/dgv/app/home>`__
     * - DECIPHER HI
-      - N/A
+      - :term:`N/A (Emailed Author)`
       - DECIPHER haploinsufficiency score
       - `PMID:20976243 <https://europepmc.org/article/MED/20976243>`__
     * - ENSEMBL
@@ -134,7 +132,7 @@ The following datasources are downloaded from public internet resources.
       - tissue-specific gene expression
       - `GTEx <https://www.gtexportal.org/home/>`__
     * - HelixMtDb
-      - N/A
+      - :term:`N/A (Emailed Author)`
       - mitochondrial genome frequencies
       - `HelixMtDb <https://www.helix.com/mitochondrial-variant-database>`__
     * - HGNC
@@ -182,11 +180,11 @@ The following datasources are downloaded from public internet resources.
       - Orphanet disease-gene associations
       - `Orphadata <https://www.orphadata.org/>`__
     * - rCNV Score
-      - N/A
+      - `no restrictions <https://gnomad.broadinstitute.org/policies>`__
       - dosage sensitivity score
       - `PMID:35917817 <https://europepmc.org/article/med/35917817>`__
     * - TAD annotation
-      - N/A
+      - :term:`N/A (Emailed Author)`
       - Topologically Associated Domains annotation
       - `YUE Lab <http://3dgenome.fsm.northwestern.edu>`__
     * - 1000G SV map
