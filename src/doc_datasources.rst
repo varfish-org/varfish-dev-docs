@@ -36,7 +36,9 @@ The following datasources are used directly from the repository.
       - Supplementary Findings Gene List of ACMG
       - `PMID:35802134 <https://europepmc.org/article/med/35802134>`__
     * - DOMINO
-      - N/A
+      - N/A (based on denovodb, which is permissive, but Simons Foundation is
+        only to projects for autism and intellectual disability, author
+        contacted)
       - Score for assessing the probability for a gene to harbour dominant changes
       - Institute of Molecular and Clinical Ophthalmology Basel; `PMID:28985496 <https://europepmc.org/article/med/28985496>`__
     * - Enrichment Regions
