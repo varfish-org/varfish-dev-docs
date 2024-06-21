@@ -11,3 +11,6 @@ Glossary
 
     N/A (Emailed Author)
         License not available, emailed author about it.
+
+    SOP
+        Standard Operating Procedure

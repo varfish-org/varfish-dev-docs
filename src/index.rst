@@ -50,6 +50,7 @@ The section "Module Design Documents" provides detailed descriptions of the indi
     des_cases_files
     des_cases_qc
     des_cases_analysis
+    des_seqvars
 
 
 -----

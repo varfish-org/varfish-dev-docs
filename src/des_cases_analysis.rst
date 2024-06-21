@@ -5,12 +5,25 @@ Design: Case Analysis
 =====================
 
 This document describes the software design of the ``cases_analysis`` module.
+
+.. _des_cases_analysis_responsibilites:
+
+-----------------------
+Module Responsibilities
+-----------------------
+
 This module has the following responsibilities:
 
 #. Maintain the database records for
     - case analysis activity for a case and potentially multiple analysist user, and
     - case analysis sessions for per case and analyst user
 #. Provide the CRUD operations on these records
+
+.. _des_cases_analysis_synopsis:
+
+--------
+Synopsis
+--------
 
 Cases may be analyzed multiple times, e.g., when the index is sequenced, then again when the parents are added, and maybe at a later point in time.
 Such reanalyses are generally also reimbursed by health insurances.
