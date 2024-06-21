@@ -34,6 +34,24 @@ The section "Overview Documents" provides high-level overview documents.
     doc_repooverview
     doc_datasources
 
+
+-----
+
+The section "Module Design Documents" provides detailed descriptions of the individual modules.
+
+-----
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Module Design Documents
+
+    des_overview
+    des_cases
+    des_cases_files
+    des_cases_qc
+    des_cases_analysis
+
+
 -----
 
 And finally, some miscellaneous documents.
