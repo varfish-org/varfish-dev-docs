@@ -75,6 +75,8 @@ Users can annotate result variants in different ways.
 Database Entities
 -----------------
 
+.. _des_cases_analysis_databaseentities_seqvarquerypresets:
+
 Seqvar Query Presets
 ====================
 
@@ -95,7 +97,7 @@ In the following ER diagram, only ``SeqvarQueryPresetsXYZ`` is shown as a placeh
 
 .. mermaid::
     :align: center
-    :caption: ER diagrem of the ``cases_analysis`` module.
+    :caption: ER diagram of the ``cases_analysis`` module (part 1: presets).
     :zoom: true
 
     erDiagram
@@ -104,6 +106,7 @@ In the following ER diagram, only ``SeqvarQueryPresetsXYZ`` is shown as a placeh
         SeqvarQueryPresetsSet ||..o{ SeqvarQueryQuickPresets : has
         SeqvarQueryQuickPresets ||..|| SeqvarQueryPresetsXYZ : uses
 
+.. _des_cases_analysis_databaseentities_seqvarqueries:
 
 Seqvar Queries
 ==============
@@ -117,11 +120,88 @@ Seqvar Queries
 ``SeqvarQueryExecution``
     The execution of a query with given query settings.
 
+``SeqvarQueryExecutionJob``
+    The model interfacing/specizalizing ``bgjobs.BackgroundJob`` for the query execution.
+    Log messages are attached as ``bgjobs.BackgroundJobLogEntry`` records to the corresponding ``bgjobs.BackgroundJob``.
+
+The following ER diagram displays the models from this section and their relationship to the ones from :ref:`des_cases_analysis_databaseentities_seqvarquerypresets` as well as the ``bgjobs`` module from *sodar-core*.
+Again, only ``SeqvarQueryPresetsXYZ`` is shown as a placeholder for all entities with prefix ``SeqvarQueryPresets*``.
+
+.. mermaid::
+    :align: center
+    :caption: ER diagram of the ``cases_analysis`` module (part 2: query).
+    :zoom: true
+
+    erDiagram
+        CaseAnalysisSession ||..o{ SeqvarQuery : has
+        SeqvarQuery ||..|| SeqvarQuerySettings : settings_buffer
+        SeqvarQuerySettings ||..o| SeqvarQueryQuickPresets : uses
+        SeqvarQuerySettings ||..o| SeqvarQueryPresetsXYZ : uses
+        SeqvarQuery ||..o{ SeqvarQueryExecution : has
+        SeqvarQueryExecution ||..|| BackgroundJob : has
+        BackgroundJob ||..o{ BackgroundJobLogEntry : has
+        SeqvarQueryExecution ||..|| SeqvarQuerySettings : current_settings
+
+.. _des_cases_analysis_databaseentities_seqvarresults:
+
 Seqvar Results
 ==============
 
+``SeqvarResultSet``
+    Stores the results for one ``SeqvarQueryExecution``.
+    Also provides information about the data sources used in the result in the field ``datasource_infos``.
+    Note that this field is a JSON field using a pydantic model ``DataSourceInfos``.
+
+``SeqvarResultRow``
+    Stores one row for one ``SeqvarResultSet``.
+    The columns for identifying the variant (genome release, chromosome, chromosome number, start position, end position, reference allele, alternative allele) are stored as separate fields to allow for fast lookup.
+    Detailed information such as genes, scores, etc. are stored in JSON fields a pydantic model ``SeqvarResultRowPayload``.
+
+The following ER diagram displays the models from this section and their relationship to the ones from :ref:`des_cases_analysis_databaseentities_seqvarqueries`.
+
+.. mermaid::
+    :align: center
+    :caption: ER diagram of the ``cases_analysis`` module (part 3: results).
+    :zoom: true
+
+    erDiagram
+        SeqvarQueryExecution ||..o| SeqvarResultSet : has
+        SeqvarResultSet ||..o{ SeqvarResultRow : has
+
+.. _des_cases_analysis_databaseentities_seqvarannotation:
+
 Seqvar Annotation
 =================
+
+.. caution::
+
+    The following entities are currently in the legacy ``variants`` module.
+    We provide their legacy alias in parentheses.
+
+``SeqvarFlag`` (``SmallvariantFlag``)
+    Categorial flags and color codes for seqvars.
+
+``SeqvarComment`` (``SmallvariantComment``)
+    Free-text comments for seqvars.
+
+``SeqvarAcmgClassification`` (``SmallvariantAcmgClassification``)
+    ACMG classification for seqvars.
+
+Note that these entities do not have an explicit foreign key to the variant..
+Rather, they all provide genome release, chromosome, start position, reference allele, and alternative allele to refer to the variant they refer to as well as the case and user.
+
+.. mermaid::
+    :align: center
+    :caption: ER diagram of the ``cases_analysis`` module (part 4: user annotation).
+    :zoom: true
+
+    erDiagram
+        SeqvarFlag }o..|| User : created_by
+        SeqvarComment }o..|| User : created_by
+        SeqvarAcmgClassification }o..|| User : created_by
+        SeqvarFlag }o..|| Case : is_for
+        SeqvarComment }o..|| Case : is_for
+        SeqvarAcmgClassification }o..|| Case : is_for
 
 .. _des_cases_analysis_entities_external:
 
@@ -132,11 +212,9 @@ External Entities
 
 
 - ``projectroles.Project`` (from *sodar-core* library)
+- ``bgjobs.BackgroundJob`` and ``bgjobs.BackgroundJobLogEntry`` (from *sodar-core* library)
 - ``User`` (central user model)
 - ``cases_analysis.CaseAnalysisSession``
-
-Module Entities
-===============
 
 ------------
 User Stories

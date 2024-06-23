@@ -74,7 +74,7 @@ The following ER diagram shows the relationships between the entities:
 
 .. mermaid::
     :align: center
-    :caption: ER diagrem of the ``cases_analysis`` module.
+    :caption: ER diagram of the ``cases_analysis`` module.
 
     erDiagram
         Case ||..o{ CaseAnalysis : has
