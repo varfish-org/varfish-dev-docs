@@ -22,7 +22,7 @@ This module has the following responsibilities:
     - Allow users to fetch the query jobs results in a paginated and ordered manner
     - Allow users to perform sequence variant annotation on the results in the form of flags, color codes, and ACMG classification
 
-.. _des_cases_analysis_synopsis:
+.. _des_seqvars_synopsis:
 
 --------
 Synopsis
@@ -69,13 +69,13 @@ Users can annotate result variants in different ways.
 - Variant comments with free-text comments.
 - ACMG classification of the variant (manual pick fulfilled criteria and upgrade/downgrade severity).
 
-.. _des_cases_analysis_databaseentities:
+.. _des_seqvars_databaseentities:
 
 -----------------
 Database Entities
 -----------------
 
-.. _des_cases_analysis_databaseentities_seqvarquerypresets:
+.. _des_seqvars_databaseentities_seqvarquerypresets:
 
 Seqvar Query Presets
 ====================
@@ -92,6 +92,7 @@ This section describes the database entities maintained by this module.
 ``SeqvarQueryQuickPresets``
     Select one category presets of each category and make it available as a quick preset.
     Examples would be "recessive inheritance" or "mitochondriopathy".
+    Multiple quick presets can be flagged as "auto-execute" to allow for easy launching of all quick presets for an SOP.
 
 In the following ER diagram, only ``SeqvarQueryPresetsXYZ`` is shown as a placeholder for all entities with prefix ``SeqvarQueryPresets*``.
 
@@ -106,7 +107,7 @@ In the following ER diagram, only ``SeqvarQueryPresetsXYZ`` is shown as a placeh
         SeqvarQueryPresetsSet ||..o{ SeqvarQueryQuickPresets : has
         SeqvarQueryQuickPresets ||..|| SeqvarQueryPresetsXYZ : uses
 
-.. _des_cases_analysis_databaseentities_seqvarqueries:
+.. _des_seqvars_databaseentities_seqvarqueries:
 
 Seqvar Queries
 ==============
@@ -124,7 +125,7 @@ Seqvar Queries
     The model interfacing/specizalizing ``bgjobs.BackgroundJob`` for the query execution.
     Log messages are attached as ``bgjobs.BackgroundJobLogEntry`` records to the corresponding ``bgjobs.BackgroundJob``.
 
-The following ER diagram displays the models from this section and their relationship to the ones from :ref:`des_cases_analysis_databaseentities_seqvarquerypresets` as well as the ``bgjobs`` module from *sodar-core*.
+The following ER diagram displays the models from this section and their relationship to the ones from :ref:`des_seqvars_databaseentities_seqvarquerypresets` as well as the ``bgjobs`` module from *sodar-core*.
 Again, only ``SeqvarQueryPresetsXYZ`` is shown as a placeholder for all entities with prefix ``SeqvarQueryPresets*``.
 
 .. mermaid::
@@ -142,7 +143,7 @@ Again, only ``SeqvarQueryPresetsXYZ`` is shown as a placeholder for all entities
         BackgroundJob ||..o{ BackgroundJobLogEntry : has
         SeqvarQueryExecution ||..|| SeqvarQuerySettings : current_settings
 
-.. _des_cases_analysis_databaseentities_seqvarresults:
+.. _des_seqvars_databaseentities_seqvarresults:
 
 Seqvar Results
 ==============
@@ -157,7 +158,7 @@ Seqvar Results
     The columns for identifying the variant (genome release, chromosome, chromosome number, start position, end position, reference allele, alternative allele) are stored as separate fields to allow for fast lookup.
     Detailed information such as genes, scores, etc. are stored in JSON fields a pydantic model ``SeqvarResultRowPayload``.
 
-The following ER diagram displays the models from this section and their relationship to the ones from :ref:`des_cases_analysis_databaseentities_seqvarqueries`.
+The following ER diagram displays the models from this section and their relationship to the ones from :ref:`des_seqvars_databaseentities_seqvarqueries`.
 
 .. mermaid::
     :align: center
@@ -168,7 +169,7 @@ The following ER diagram displays the models from this section and their relatio
         SeqvarQueryExecution ||..o| SeqvarResultSet : has
         SeqvarResultSet ||..o{ SeqvarResultRow : has
 
-.. _des_cases_analysis_databaseentities_seqvarannotation:
+.. _des_seqvars_databaseentities_seqvarannotation:
 
 Seqvar Annotation
 =================
@@ -203,12 +204,12 @@ Rather, they all provide genome release, chromosome, start position, reference a
         SeqvarComment }o..|| Case : is_for
         SeqvarAcmgClassification }o..|| Case : is_for
 
-.. _des_cases_analysis_entities_external:
+.. _des_seqvars_entities_external:
 
 External Entities
 =================
 
-.. _des_cases_analysis_entities_module:
+.. _des_seqvars_entities_module:
 
 
 - ``projectroles.Project`` (from *sodar-core* library)
@@ -220,6 +221,65 @@ External Entities
 User Stories
 ------------
 
+.. caution:: This section is still TODO.
+
 --------------
 REST Endpoints
 --------------
+
+The ``cases_analysis`` module provides the following endpoints:
+
+**Seqvar Query Presets**
+
+``SeqvarQueryPresetsSet``
+    - Create new query preset set based on factory defaults.
+    - List all query preset sets for a given project.
+    - Retrieve a single query preset set.
+    - Update an existing query preset set.
+    - Delete an existing query preset set (actually: flag it as deleted).
+
+``SeqvarQueryPresets*`` (for each category)
+    - Create a new category preset based on factory defaults.
+    - List all category presets for a given preset set.
+    - Retrieve a single category preset.
+    - Update an existing category preset.
+    - Delete an existing category preset (actually: flag it as deleted).
+
+``SeqvarQueryQuickPresets``
+    - Create a new quick preset.
+    - List all quick presets for a given preset set.
+    - Retrieve a single quick preset.
+    - Update an existing quick preset.
+    - Delete an existing quick preset (actually: flag it as deleted).
+
+**Seqvar Queries**
+
+``SeqvarQuery``
+    - Launch (create and execute) all "auto-execute" quick presets for a given preset set.
+    - Create a new query with corresponding query settings based on a quick preset.
+    - Update a query properties.
+    - Delete a query (actually: flag it as deleted).
+
+``SeqvarQuerySettings``
+    - Update query settings (only for the ones linked by a query, not the ones from executions).
+    - Retrieve query settings for a given query or query execution.
+
+``SeqvarQueryExecution``
+    - List all query executions for a given query.
+    - Retrieve one query execution together with its execution job.
+
+**Seqvar Results**
+
+``SeqvarResultSet``
+    - List the zero to one result sets for a given query execution.
+
+``SeqvarResultRow``
+    - Retrieve a page of result rows for a given seqvar result set.
+      Sorting is possible.
+      Filtration may be possible in the future.
+
+**Seqvar Annotation**
+
+.. caution::
+
+    For now, we re-use the endpoints from the legacy ``variants`` module for seqvar annotation.

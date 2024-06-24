@@ -101,7 +101,7 @@ User lists case analysis sessions
 REST Endpoints
 --------------
 
-The ``cases_analysis`` module provides the following activities:
+The ``cases_analysis`` module provides the following endpoints:
 
 List ``CaseAnalysis``
     List all case analysis records.
