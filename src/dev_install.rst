@@ -251,12 +251,37 @@ Last, download the icon sets for VarFish and make scripts, stylesheets and icons
     make geticons
     make collectstatic
 
+.. _dev_fill_database:
+
+-----------------------
+Init DB for Development
+-----------------------
+
+To kickstart development, execute the following command.
+This will create a category "DevCategory", a project "DevProject", and a case with a quatro pedigree in the database.
+Note that no actual data files are being created.
+However, this is suitable for frontend development.
+
+.. code-block:: bash
+
+    cd backend
+    pipenv run python manage.py initdev
+
+Write down the passwort of the created ``devuser`` users so you can later login with their accounts.
+To reset the passwords of the ``root`` and ``devuser`` when they already create, use the ``python manage.py changepassword`` command or call ``python manage.py initdev --reset-password``.
 
 .. _dev_database_import:
 
----------------
-Database Import
----------------
+------------------------
+Database Import (Legacy)
+------------------------
+
+.. note::
+
+    This section explains the data import for the old/legacy way of managing variant queries.
+    Here, large amounts of annotation data were queried in a Postgres database.
+    The "new way" uses annotation Docker services and the Rust-based worker.
+    Please skip this section unless you need the legacy database tables.
 
 First, download the pre-build database files that we provide and unpack them.
 Please make sure that you have enough space available.
