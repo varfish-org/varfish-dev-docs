@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.0](https://github.com/varfish-org/varfish-dev-docs/compare/v0.1.0...v0.2.0) (2024-07-02)
+
+
+### Features
+
+* Add domino ([23e9c9b](https://github.com/varfish-org/varfish-dev-docs/commit/23e9c9b857c1cf11554cd29df535da1ac3b6549d))
+* adding developer documentation ([#16](https://github.com/varfish-org/varfish-dev-docs/issues/16)) ([#17](https://github.com/varfish-org/varfish-dev-docs/issues/17)) ([d18a6b9](https://github.com/varfish-org/varfish-dev-docs/commit/d18a6b9d2a77d6107fbd3be7e26705844d70b8b1))
+* seqvars design document ([#19](https://github.com/varfish-org/varfish-dev-docs/issues/19)) ([ccbf5ea](https://github.com/varfish-org/varfish-dev-docs/commit/ccbf5ea6eb57310ac9f73dee963ed9d975088d53))
+* started to resolve N/A license column values ([#14](https://github.com/varfish-org/varfish-dev-docs/issues/14)) ([70a90e8](https://github.com/varfish-org/varfish-dev-docs/commit/70a90e886216c8eb56a20c4745ace7833979bbc8))
+* starting out with design documents ([#18](https://github.com/varfish-org/varfish-dev-docs/issues/18)) ([d7f03de](https://github.com/varfish-org/varfish-dev-docs/commit/d7f03de6a80d56c6400b24024713886c0ddbcfb4))
+
+
+### Documentation
+
+* documenting manage.py initdev docs ([#20](https://github.com/varfish-org/varfish-dev-docs/issues/20)) ([1b76220](https://github.com/varfish-org/varfish-dev-docs/commit/1b7622052fad224b8ef44ee026e58a185690d0f0))
+* refine datasource table columns ([#8](https://github.com/varfish-org/varfish-dev-docs/issues/8)) ([8cf055e](https://github.com/varfish-org/varfish-dev-docs/commit/8cf055e650e6b9afcc35b07da930f0784630ac10))
+
 ## 0.1.0 (2024-02-29)
 
 
