@@ -1,4 +1,4 @@
-furo==2024.7.18
+furo==2024.8.6
 sphinx-autobuild==2024.4.16
 sphinx-basic-ng==1.0.0b2
 sphinxcontrib-applehelp==2.0.0
