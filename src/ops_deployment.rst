@@ -16,11 +16,11 @@ Deployment
 
 ::
 
-    # git clone https://github.com/varfish-org/varfish-docker-compose-ng.git /opt/varfish-docker-compose
+    # git clone https://github.com/varfish-org/varfish-docker-compose.git /opt/varfish-docker-compose
     # cd /opt/varfish-docker-compose
     # mkdir -p .prod
     # mv /opt/varfish-download/volumes .prod/volumes
-    # mkdir -p .prod/volumes/{minio,varfish-static}/data
+    # mkdir -p .prod/volumes/{minio,redis,varfish-static,varfish-dynamic}/data
 
 ::
 
@@ -29,7 +29,7 @@ Deployment
     # echo postgresql://varfish:password@postgres/varfish >.prod/secrets/db-url
     # echo minio-root-password >.prod/secrets/minio-root-password
     # echo minio-varfish-password >.prod/secrets/minio-varfish-password
-    # rm -
+    # pwgen 100 1 >.prod/secrets/varfish-server-django-secret-key
     # mkdir -p .prod/config/nginx
     # cp utils/nginx/nginx.conf .prod/config/nginx
 
@@ -38,10 +38,18 @@ Deployment
 
 Bring up the system for the first time.
 Note that the startup of the web server will be delayed until all migrations are applied.
-This will take some time.
+This will take some time. You might also see some errors during the startup of the web server.
 
 ::
+    # docker compose pull
     # docker compose up
+
+Do not worry about an error message like the following. This is expected with the first launch and
+will be temporary.
+
+::
+
+    # django.db.utils.OperationalError: connection to server at "postgres" (172.18.0.4), port 5432 failed: FATAL:  the database system is starting up
 
 Now go to the website and see issue with self-signed certificate.
 
@@ -86,3 +94,9 @@ Now, launch again:
 ::
 
     docker compose up
+
+To launch the containers in daemon mode, use:
+
+::
+
+    docker compose up -d
